@@ -19,7 +19,11 @@ jobs:
       run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode-version }}.app
     - name: Remove build directories if they exist
       run: |
-        [ -d UICatalog/build ] && rm -rf UICatalog/build
-        [ -d UIKitCatalog/build ] && rm -rf UIKitCatalog/build
+        if [ -d "UICatalog/build" ]; then
+          rm -rf UICatalog/build
+        fi
+        if [ -d "UIKitCatalog/build" ]; then
+          rm -rf UIKitCatalog/build
+        fi
+      shell: bash
     - run: npm install
-

@@ -27,3 +27,9 @@ jobs:
         fi
       shell: bash
     - run: npm install
+    - name: Build iOS App
+      run: |
+        set -x
+        xcodebuild clean -project UICatalog.xcodeproj -scheme UICatalog -sdk iphonesimulator15.5
+        xcodebuild -project UICatalog.xcodeproj -scheme UICatalog -sdk iphonesimulator15.5
+      shell: bash

@@ -3,8 +3,6 @@ on: [push, pull_request]
 
 jobs:
   build:
-
-    # https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md
     runs-on: macos-12
 
     strategy:
@@ -19,5 +17,9 @@ jobs:
         node-version: lts/*
     - name: Select Xcode ${{ matrix.xcode-version }}
       run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode-version }}.app
-    - run: rm -rf UICatalog/build UIKitCatalog/build
+    - name: Remove build directories if they exist
+      run: |
+        [ -d UICatalog/build ] && rm -rf UICatalog/build
+        [ -d UIKitCatalog/build ] && rm -rf UIKitCatalog/build
     - run: npm install
+
